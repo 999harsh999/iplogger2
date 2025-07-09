@@ -45,7 +45,7 @@ def index():
         print(log_entry)
 
 
-    return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=cOS6432b8uSVwtWo")
+    print("🔍 Route executed — IP should be captured")
 
 
 if __name__ == '__main__':

